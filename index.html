@@ -7,36 +7,34 @@
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <style>
-        body{font-family:Arial,sans-serif;text-align:center;background: #E6DADA;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #274046, #E6DADA);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #274046, #E6DADA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-margin:0}
+        body{font-family:Arial,sans-serif;text-align:center;background: #E6DADA; background: -webkit-linear-gradient(to right, #274046, #E6DADA); background: linear-gradient(to right, #274046, #E6DADA); margin:0}
         #container{display:flex;flex-direction:column;align-items:center;margin:20px}
-        .page-container{position:relative;margin-bottom:20px;width:fit-content}
-        .page-image{max-width:100%;display:block;position:relative;z-index:1}
-        .word{position:absolute;border:2px solid rgb(0 0 255 / 0%);background:rgb(0 0 255 / 6%);cursor:pointer;z-index:10;pointer-events:auto}
-        #output{margin:20px;padding:10px;border:1px solid #ccc;direction:rtl;background:#fff;max-height:300px;overflow-y:auto}
+        .page-container{position:relative;margin-bottom:20px;width:fit-content;opacity:1}
+        .page-container.hidden{opacity:0;transition:opacity 0.5s}
+        .page-image{max-width:100%;display:block;position:relative;z-index:1;visibility:visible}
+        .word{position:absolute;border:2px solid rgb(0 0 255 / 9%);background:rgb(0 0 255 / 1%);cursor:pointer;z-index:10;pointer-events:auto} /* Increased visibility */
+        #output{margin:20px;padding:10px;border:1px solid #ccc;direction:rtl;background:#fff;max-height:300px;overflow-y:auto;display:none}
         button{margin:10px;padding:10px 20px;background:#007bff;color:#fff;border:none;border-radius:5px;cursor:pointer}
         button:hover{background:#0056b3}
         .tooltip{position:fixed;background:#333;color:#fff;padding:10px;border-radius:5px;z-index:1000;max-width:200px;text-align:left;display:none}
         .tooltip button{margin-top:5px;padding:5px 10px;font-size:12px}
         #loading{display:none;font-size:18px;margin:20px}
         #controls{margin-bottom:20px}
+        #startProcessing{display:none}
+        .image-error{display:block;color:red;font-size:16px;margin:10px}
     </style>
 </head>
 <body>
     <div id="controls">
-        <h3>UPLAD YOUR PDF</h3>
-        <input style="margin-left: 70PX;" type="file" id="fileInput" accept="image/*,application/pdf">
+        <h3>UPLOAD PDF OR IMAGE</h3>
+        <input style="margin-left: 70px;" type="file" id="fileInput" accept="image/*,application/pdf">
+        <button id="startProcessing">ابدأ المعالجة</button>
         <button id="saveOfflineButton" style="display:none;">DOWNLOAD</button>
     </div>
     <div id="loading">The file is being processed...</div>
     <div id="container"></div>
     <div id="output"></div>
     <div id="offlineData" style="display:none;"></div>
-
-    <script src="/main.js">
-      
-    </script>
+    <script src="/main.js"></script>
 </body>
 </html>
